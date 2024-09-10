@@ -1,5 +1,9 @@
 import "cypress-file-upload";
-import { Login } from "./UserLogin.cy";
+import { Login } from "./credentials.cy";
+
+function walletDeposit() {
+  cy.get(`a[href ="/wallet-request"]`).click();
+}
 
 describe("Verify Wallet Deposit Request", () => {
   it("Verify when user enter valid details", () => {
@@ -7,8 +11,7 @@ describe("Verify Wallet Deposit Request", () => {
     Login();
 
     //Navigate to Wallet Deposit Request
-    cy.get(`a[href ="/wallet-request"]`).click();
-    cy.wait(2);
+    walletDeposit();
     cy.contains(`Request Deposit`).click();
     // cy.get('div > div[class*="-placeholder"] > div:contains("Client Name")').click().type('SNT0002')
     cy.get('div[class*="-placeholder"] > div:contains("Client Name")').click();
@@ -28,7 +31,6 @@ describe("Verify Wallet Deposit Request", () => {
         mimeType: "image/jpg",
       });
     });
-    // cy.contains('images.jpg');
     cy.get("#remarks").type("Deposit");
     cy.contains("Submit").click();
     // cy.contains('Cancel').click()
@@ -36,8 +38,9 @@ describe("Verify Wallet Deposit Request", () => {
 
   it("Verify when SMS Amount is Negative", () => {
     Login();
-    cy.get(`a[href ="/wallet-request"]`).click();
-    cy.wait(2);
+    //Wallet Deposit Request
+
+    walletDeposit();
     cy.contains(`Request Deposit`).click();
     // cy.get('div > div[class*="-placeholder"] > div:contains("Client Name")').click().type('SNT0002')
     cy.get('div[class*="-placeholder"] > div:contains("Client Name")').click();
@@ -57,16 +60,16 @@ describe("Verify Wallet Deposit Request", () => {
         mimeType: "image/jpg",
       });
     });
-    // cy.contains('images.jpg');
     cy.get("#remarks").type("Deposit");
     cy.contains("Submit").click();
     // cy.contains('Cancel').click()
   });
 
   it("Verify when Topup Amount is Negative", () => {
+    //User Login
     Login();
-    cy.get(`a[href ="/wallet-request"]`).click();
-    cy.wait(2);
+    //Wallet Deposit Request
+    walletDeposit();
     cy.contains(`Request Deposit`).click();
     // cy.get('div > div[class*="-placeholder"] > div:contains("Client Name")').click().type('SNT0002')
     cy.get('div[class*="-placeholder"] > div:contains("Client Name")').click();
@@ -86,13 +89,14 @@ describe("Verify Wallet Deposit Request", () => {
         mimeType: "image/jpg",
       });
     });
-    // cy.contains('images.jpg');
     cy.get("#remarks").type("Deposit");
     cy.contains("Submit").click();
     // cy.contains('Cancel').click()
   });
+
   it("Verify when Topup Amount is Negative", () => {
-    Login();
+    Log();
+
     cy.get(`a[href ="/wallet-request"]`).click();
     cy.wait(2);
     cy.contains(`Request Deposit`).click();
@@ -114,7 +118,6 @@ describe("Verify Wallet Deposit Request", () => {
         mimeType: "image/jpg",
       });
     });
-    // cy.contains('images.jpg');
     cy.get("#remarks").type("Deposit");
     cy.contains("Submit").click();
     // cy.contains('Cancel').click()

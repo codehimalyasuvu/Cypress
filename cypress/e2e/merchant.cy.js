@@ -1,10 +1,20 @@
-import { Login } from "./UserLogin.cy";
+import { Login } from "./credentials.cy";
+
+function merchants() {
+  cy.get(`a[href ="/merchants"]`).click();
+}
+merchants();
+
+function addMerchant() {
+  cy.get("div > p").contains("Add Merchant").click();
+}
 
 describe("Verify Merchants", () => {
-  it("Verify when user enter valid details", () => {});
-  //UserLogin
+  it("Verify when user add merchants with valid data", () => {
+    //Login
+    Login();
 
-  Login();
-
-  cy.get(`a[href ="/merchants"]`).click();
+    //Navigate to Merchant
+    addMerchant();
+  });
 });
